@@ -11,21 +11,24 @@
 
     <form data-testid="calculator">
       <input id="first-number" placeholder="First Number" />
-      <button>+</button>
-      <button>-</button>
-      <button>*</button>
-      <button>/</button>
+      <button id="plus-button">+</button>
+      <button id="subtract-button">-</button>
+      <button id="multiply-button">*</button>
+      <button id="divide-button">/</button>
       <input id="second-number" placeholder="Second Number" />
-      <button>=</button>
-      <button>C</button>
+      <button id="equal-button" onclick="equalButton(event)">=</button>
+      <button id="clear-button">C</button>
     </form>
 
     <section data-testid="recentResult">
+      <h2>Result</h2>
+      <div id="result-here">RESULT</div>
       <!-- The most recent calculation result goes here. -->
     </section>
 
     <section data-testid="resultHistory">
-      <!-- The list of calculation results goes here. -->
+      <h3>Calculation History</h3>
+      <ul id="history-list"></ul>
     </section>
   </body>
 </html>

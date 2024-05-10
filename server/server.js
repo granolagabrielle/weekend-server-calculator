@@ -9,6 +9,10 @@ app.use(express.json({ extended: true }));
 // Global variable that will contain all of the
 // calculation objects:
 let calculations = [];
+// let plusButton = document.getElementById('plus-button');
+// let subtractButton = document.getElementById('subtract-button');
+// let multiplyButton = document.getElementById('multiply-button');
+// let divideButton = document.getElementById('divide-button');
 
 // Here's a wonderful place to make some routes:
 

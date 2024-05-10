@@ -1,5 +1,6 @@
 function onReady() {
   console.log('client.js is sourced!');
+  fetchCalculations();
 }
 
 onReady();
@@ -13,13 +14,11 @@ function fetchCalculations() {
     .then(function (response) {
       console.log(response);
       let calculationsFromServer = response.data;
-      let resultHistory = document.getElementById('resultHistory');
+      let resultHistory = document.getElementById('history-list');
       resultHistory.innerHTML = '';
       for (let calculation of calculationsFromServer) {
         resultHistory.innerHTML += `
-    <ul>
-        <li>${calculation.firstNumber} + ${calculation.secondNumber} = result</li>
-    </ul>`;
+        <li>${calculation.firstNumber} + ${calculation.secondNumber} = result</li>`;
       }
     })
     .catch(function (error) {
@@ -30,13 +29,15 @@ function fetchCalculations() {
 
 // function to calculate
 function calculateTotal() {
+  const firstNumber = document.getElementById('first-number').value;
+  const secondNumber = document.getElementById('second-number').value;
   axios({
     method: 'POST',
     url: '/calculations',
     data: {
-      firstNumber,
-      secondNumber,
-      operator,
+      firstNumber: firstNumber,
+      secondNumber: secondNumber,
+      //   operator,
     },
   })
     .then(function (response) {
@@ -47,4 +48,13 @@ function calculateTotal() {
     .catch(function (response) {
       console.log('error POSTing calculations', error);
     });
+}
+
+// equal button function
+function equalButton(event) {
+  event.preventDefault();
+  let equalButton = document.getElementById('equal-button');
+  equalButton = event.target;
+  console.log('equal button clicked');
+  calculateTotal();
 }

@@ -18,7 +18,8 @@ function fetchCalculations() {
       resultHistory.innerHTML = '';
       for (let calculation of calculationsFromServer) {
         resultHistory.innerHTML += `
-        <li>${calculation.firstNumber} + ${calculation.secondNumber} = result</li>`;
+        // calculation has to be on server side
+        <li>${calculation.firstNumber} + ${calculation.secondNumber} = ${calculation.result}</li>`;
       }
     })
     .catch(function (error) {

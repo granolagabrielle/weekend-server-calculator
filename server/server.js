@@ -20,6 +20,9 @@ let calculations = [];
 
 // add get to grab all previous calculations
 app.get('/calculations', (req, res) => {
+  for (let calculation of calculations) {
+    calculation.result = calculation.firstNumber + calculation.secondNumber;
+  }
   res.send(calculations);
 });
 

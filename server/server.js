@@ -4,18 +4,34 @@ let PORT = process.env.PORT || 5000;
 
 app.use(express.json());
 app.use(express.static('server/public'));
+app.use(express.json({ extended: true }));
 
 // Global variable that will contain all of the
 // calculation objects:
-let calculations = []
-
+let calculations = [];
 
 // Here's a wonderful place to make some routes:
 
 // GET /calculations
 
+// add get to grab all previous calculations
+app.get('/calculations', (req, res) => {
+  res.send(calculations);
+});
+
 // POST /calculations
 
+// add post to post all calculations
+app.post('/calculations', (req, res) => {
+  console.log('processing post for /calculation', req.body);
+  const newCalculation = req.body;
+  if (!newCalculation.firstNumber || !newCalculation.secondNumber) {
+    res.status(400).send({ error: 'first and second numbers are required' });
+    return;
+  }
+  calculations.push(newCalculation);
+  res.status(201).send(newCalculation);
+});
 
 // PLEASE DO NOT MODIFY ANY CODE BELOW THESE BEARS:
 // 🐻  🐻‍❄️  🧸  🐻  🐻‍❄️  🧸  🐻  🐻‍❄️  🧸  🐻  🐻‍❄️  🧸
@@ -39,10 +55,10 @@ const server = app.listen(PORT, () => {
 // absolutely no need for you to reason about this.
 app.closeServer = () => {
   server.close();
-}
+};
 
 app.setCalculations = (calculationsToSet) => {
   calculations = calculationsToSet;
-}
+};
 
 module.exports = app;

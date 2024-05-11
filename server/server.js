@@ -9,21 +9,13 @@ app.use(express.json({ extended: true }));
 // Global variable that will contain all of the
 // calculation objects:
 let calculations = [];
-// let plusButton = document.getElementById('plus-button');
-// let subtractButton = document.getElementById('subtract-button');
-// let multiplyButton = document.getElementById('multiply-button');
-// let divideButton = document.getElementById('divide-button');
 
 // Here's a wonderful place to make some routes:
 
 // GET /calculations
 
-// add get to grab all previous calculations
+// add get to send calculation array
 app.get('/calculations', (req, res) => {
-  for (let calculation of calculations) {
-    calculation.result = Number(calculation.firstNumber) + Number(calculation.secondNumber);
-    console.log(calculation.result);
-  }
   res.send(calculations);
 });
 
@@ -33,12 +25,30 @@ app.get('/calculations', (req, res) => {
 app.post('/calculations', (req, res) => {
   console.log('processing post for /calculation', req.body);
   const newCalculation = req.body;
-  if (!newCalculation.firstNumber || !newCalculation.secondNumber) {
+  let numOne = Number(newCalculation.numOne);
+  let numTwo = Number(newCalculation.numTwo);
+  let operator = newCalculation.operator;
+  if (!newCalculation.numOne || !newCalculation.numTwo) {
     res.status(400).send({ error: 'first and second numbers are required' });
     return;
+  } else if (operator === '+') {
+    newCalculation.result = numOne + numTwo;
+  } else if (operator === '-') {
+    newCalculation.result = numOne - numTwo;
+  } else if (operator === '*') {
+    newCalculation.result = numOne * numTwo;
+  } else if (operator === '/') {
+    newCalculation.result = numOne / numTwo;
   }
   calculations.push(newCalculation);
-  res.status(201).send(newCalculation);
+  console.log(calculations);
+  res.sendStatus(201);
+});
+
+// app.delete to clear inputs
+app.delete('/calculations', (req, res) => {
+  calculations = [];
+  res.sendStatus(201);
 });
 
 // PLEASE DO NOT MODIFY ANY CODE BELOW THESE BEARS:

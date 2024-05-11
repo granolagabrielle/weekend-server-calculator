@@ -5,6 +5,13 @@ function onReady() {
 
 onReady();
 
+let operator = '';
+
+function setOperator(event) {
+  operator = event.target.id;
+  console.log('operator', operator);
+}
+
 // function to post calculations
 function fetchCalculations() {
   axios({
@@ -13,13 +20,9 @@ function fetchCalculations() {
   })
     .then(function (response) {
       console.log(response);
-      let calculationsFromServer = response.data;
-      let resultHistory = document.getElementById('history-list');
-      resultHistory.innerHTML = '';
-      for (let calculation of calculationsFromServer) {
-        resultHistory.innerHTML += `
-          <li>${calculation.firstNumber} ${calculation.secondNumber} = ${calculation.result}</li>`;
-      }
+      let calcHistory = response.data;
+      console.log(calcHistory);
+      renderCalculations(calcHistory);
     })
     .catch(function (error) {
       console.log(error);
@@ -27,20 +30,28 @@ function fetchCalculations() {
     });
 }
 
+// function to render calculations
+function renderCalculations(calculationData) {
+  let resultHistory = document.getElementById('history-list');
+  resultHistory.innerHTML = '';
+  for (let calculation of calculationData) {
+    resultHistory.innerHTML += `
+      <li>${calculation.numOne} ${calculation.operator} ${calculation.numTwo} = ${calculation.result}</li>`;
+  }
+}
+
 // function to calculate
-function calculateTotal() {
-  const firstNumber = document.getElementById('first-number').value;
-  const secondNumber = document.getElementById('second-number').value;
-  //   const plusButton = document.getElementById('plus-button');
-  //   const subtractButton = document.getElementById('subtract-button');
-  //   const multiplyButton = document.getElementById('multiply-button');
-  //   const divideButton = document.getElementById('divide-button');
+function calculateTotal(event) {
+  event.preventDefault();
+  const numOne = document.getElementById('first-number').value;
+  const numTwo = document.getElementById('second-number').value;
   axios({
     method: 'POST',
     url: '/calculations',
     data: {
-      firstNumber: firstNumber,
-      secondNumber: secondNumber,
+      numOne,
+      numTwo,
+      operator,
     },
   })
     .then(function (response) {
@@ -53,14 +64,27 @@ function calculateTotal() {
     });
 }
 
-// equal button function
-function equalButton(event) {
-  event.preventDefault();
-  let equalButton = document.getElementById('equal-button');
-  equalButton = event.target;
-  console.log('equal button clicked');
-  calculateTotal();
+function clearInputs() {
+  axios({
+    method: 'DELETE',
+    url: '/calculations',
+  })
+    .then(function (response) {
+      fetchCalculations();
+    })
+    .catch(function (error) {
+      console.log('error deleting history', error);
+    });
 }
+
+// // equal button function
+// function equalButton(event) {
+//   event.preventDefault();
+//   let equalButton = document.getElementById('equal-button');
+//   equalButton = event.target;
+//   console.log('equal button clicked');
+//   calculateTotal();
+// }
 
 // plus button
 // function operatorButton(event) {

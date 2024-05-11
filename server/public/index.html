@@ -11,10 +11,10 @@
 
     <form data-testid="calculator">
       <input id="first-number" placeholder="First Number" />
-      <button id="plus-button">+</button>
-      <button id="subtract-button">-</button>
-      <button id="multiply-button">*</button>
-      <button id="divide-button">/</button>
+      <button id="plus-button" onclick="operatorButton(event)">+</button>
+      <button id="subtract-button" onclick="operatorButton(event)">-</button>
+      <button id="multiply-button" onclick="operatorButton(event)">*</button>
+      <button id="divide-button" onclick="operatorButton(event)">/</button>
       <input id="second-number" placeholder="Second Number" />
       <button id="equal-button" onclick="equalButton(event)">=</button>
       <button id="clear-button">C</button>

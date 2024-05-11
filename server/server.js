@@ -21,7 +21,8 @@ let calculations = [];
 // add get to grab all previous calculations
 app.get('/calculations', (req, res) => {
   for (let calculation of calculations) {
-    calculation.result = calculation.firstNumber + calculation.secondNumber;
+    calculation.result = Number(calculation.firstNumber) + Number(calculation.secondNumber);
+    console.log(calculation.result);
   }
   res.send(calculations);
 });
@@ -39,6 +40,11 @@ app.post('/calculations', (req, res) => {
   calculations.push(newCalculation);
   res.status(201).send(newCalculation);
 });
+
+
+
+
+
 
 // PLEASE DO NOT MODIFY ANY CODE BELOW THESE BEARS:
 // 🐻  🐻‍❄️  🧸  🐻  🐻‍❄️  🧸  🐻  🐻‍❄️  🧸  🐻  🐻‍❄️  🧸

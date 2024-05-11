@@ -18,8 +18,7 @@ function fetchCalculations() {
       resultHistory.innerHTML = '';
       for (let calculation of calculationsFromServer) {
         resultHistory.innerHTML += `
-        // calculation has to be on server side
-        <li>${calculation.firstNumber} + ${calculation.secondNumber} = ${calculation.result}</li>`;
+          <li>${calculation.firstNumber} ${calculation.secondNumber} = ${calculation.result}</li>`;
       }
     })
     .catch(function (error) {
@@ -59,3 +58,29 @@ function equalButton(event) {
   console.log('equal button clicked');
   calculateTotal();
 }
+
+// plus button
+// function operatorButton(event) {
+//   event.preventDefault();
+
+// }
+
+// let plusButton = document.getElementById('plus-button');
+//   plusButton = event.target;
+//   for () {
+//     plusButton.style.backgroundColor = 'cornflowerblue';
+//   console.log('plus button was clicked');
+// }
+
+// subtraction button
+// function subtractionButton(event)
+// function operatorButton(event) {
+//     event.preventDefault();
+//     let plusButton = document.getElementById('plus-button');
+//     plusButton = event.target;
+//     plusButton.style.backgroundColor = 'cornflowerblue';
+//     console.log('plus button was clicked');
+//   }
+// division button
+
+// multiply button

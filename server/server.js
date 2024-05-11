@@ -41,11 +41,6 @@ app.post('/calculations', (req, res) => {
   res.status(201).send(newCalculation);
 });
 
-
-
-
-
-
 // PLEASE DO NOT MODIFY ANY CODE BELOW THESE BEARS:
 // 🐻  🐻‍❄️  🧸  🐻  🐻‍❄️  🧸  🐻  🐻‍❄️  🧸  🐻  🐻‍❄️  🧸
 

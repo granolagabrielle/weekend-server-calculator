@@ -31,13 +31,16 @@ function fetchCalculations() {
 function calculateTotal() {
   const firstNumber = document.getElementById('first-number').value;
   const secondNumber = document.getElementById('second-number').value;
+  //   const plusButton = document.getElementById('plus-button');
+  //   const subtractButton = document.getElementById('subtract-button');
+  //   const multiplyButton = document.getElementById('multiply-button');
+  //   const divideButton = document.getElementById('divide-button');
   axios({
     method: 'POST',
     url: '/calculations',
     data: {
       firstNumber: firstNumber,
       secondNumber: secondNumber,
-      //   operator,
     },
   })
     .then(function (response) {

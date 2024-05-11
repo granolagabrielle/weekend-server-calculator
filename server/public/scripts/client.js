@@ -34,6 +34,11 @@ function fetchCalculations() {
 function renderCalculations(calculationData) {
   let resultHistory = document.getElementById('history-list');
   resultHistory.innerHTML = '';
+  let resultHere = document.getElementById('result-here');
+  resultHere.innerHTML = '';
+  for (let i = 0; i < calculationData.length; i++) {
+    resultHere.innerHTML = `${calculationData[calculationData.length - 1].result}`;
+  }
   for (let calculation of calculationData) {
     resultHistory.innerHTML += `
       <li>${calculation.numOne} ${calculation.operator} ${calculation.numTwo} = ${calculation.result}</li>`;

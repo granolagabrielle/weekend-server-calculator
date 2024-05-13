@@ -10,6 +10,10 @@ let operator = '';
 function setOperator(event) {
   operator = event.target.id;
   console.log('operator', operator);
+  // remove selected class from all operators -- fun fact radio buttons have this behavior built in
+  document.querySelectorAll('.operator').forEach((el) => el.classList.remove('selected'));
+  // add selected to selected operators
+  event.target.classList.add('selected');
 }
 
 // function to post calculations

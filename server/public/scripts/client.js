@@ -69,7 +69,7 @@ function calculateTotal(event) {
     });
 }
 
-function clearInputs() {
+function deleteHistory() {
   axios({
     method: 'DELETE',
     url: '/calculations',
@@ -80,6 +80,12 @@ function clearInputs() {
     .catch(function (error) {
       console.log('error deleting history', error);
     });
+}
+
+// function to clear inputs
+function clearInputs() {
+  document.getElementById('first-number').value = '';
+  document.getElementById('second-number').value = '';
 }
 
 // // equal button function

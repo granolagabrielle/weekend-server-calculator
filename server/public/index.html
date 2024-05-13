@@ -5,16 +5,17 @@
     <title>Server-Side Calculator</title>
     <script defer src="scripts/axios.js"></script>
     <script defer src="scripts/client.js" charset="utf-8"></script>
+    <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
     <h1>Server-Side Calculator</h1>
 
     <form data-testid="calculator" onSubmit="calculateTotal(event)">
       <input id="first-number" placeholder="First Number" />
-      <button id="+" onclick="setOperator(event)" type="button" class="operator-button">+</button>
-      <button id="-" onclick="setOperator(event)" type="button" class="operator-button">-</button>
-      <button id="*" onclick="setOperator(event)" type="button" class="operator-button">*</button>
-      <button id="/" onclick="setOperator(event)" type="button" class="operator-button">/</button>
+      <button class="operator" id="+" onclick="setOperator(event)" type="button">+</button>
+      <button class="operator" id="-" onclick="setOperator(event)" type="button">-</button>
+      <button class="operator" id="*" onclick="setOperator(event)" type="button">*</button>
+      <button class="operator" id="/" onclick="setOperator(event)" type="button">/</button>
       <input id="second-number" placeholder="Second Number" />
       <button id="equal-button" type="submit">=</button>
       <button id="clear-button" type="button" onclick="clearInputs()">C</button>
@@ -29,6 +30,7 @@
     <section data-testid="resultHistory">
       <h3>Calculation History</h3>
       <ul id="history-list"></ul>
+      <button id="delete-history" type="button" onclick="deleteHistory()">Delete History</button>
     </section>
   </body>
 </html>

@@ -39,6 +39,10 @@ app.post('/calculations', (req, res) => {
     newCalculation.result = numOne * numTwo;
   } else if (operator === '/') {
     newCalculation.result = numOne / numTwo;
+  } else {
+    res.status(400).send({ error: 'operator must be selected' });
+    // need to include return otherwise it wont load
+    return;
   }
   calculations.push(newCalculation);
   console.log(calculations);
